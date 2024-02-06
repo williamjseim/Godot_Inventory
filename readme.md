@@ -6,4 +6,3 @@ Project Requirements
 * [ ] Hotbar swapping
 * [ ] Slots should validate if items fits
 * [ ] if item is being dragged and inventory closes it should place item in first available slot
-* [ ] 

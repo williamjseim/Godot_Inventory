@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bjh4rjqvry07i"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 848.0
+offset_bottom = 480.0
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = 368.0
+offset_right = 848.0
+offset_bottom = 480.0

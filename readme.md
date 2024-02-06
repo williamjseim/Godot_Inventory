@@ -1,5 +1,7 @@
 Project Requirements
-* adhere to solid
-* grid of slots
-* drag and drop
-* 
+* [ ] Adhere to solid
+* [ ] Grid of slots
+* [ ] Drag and drop
+* [ ] Inventory Sorting
+* [ ] Hotbar swapping
+* [ ] 

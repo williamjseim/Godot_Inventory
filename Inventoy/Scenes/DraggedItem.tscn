@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjgig0tjws7le"]
+
+[ext_resource type="Script" path="res://Inventoy/Scripts/DraggedItem.cs" id="1_k4en0"]
+
+[node name="DraggedItem" type="Panel"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_k4en0")

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dn3pwjqlcxh3f"]
+
+[node name="InventorySlot" type="Panel"]
+offset_right = 48.0
+offset_bottom = 48.0

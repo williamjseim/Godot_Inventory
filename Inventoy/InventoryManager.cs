@@ -5,14 +5,13 @@ using System.Collections.Generic;
 public partial class InventoryManager : ContainerManager
 {
 	[Export] protected DraggedItem draggedItem;
+    [Export] Item item;
 	
 	public override void _Ready()
 	{
 		base._Ready();
 		if(draggedItem == null)
 			GD.PrintErr($"{nameof(draggedItem)} is null");
-		SetupInventoryGrid();
-		Slot.Interact += this.SlotInteraction;
 	}
 
 	public override void _Process(double delta)
@@ -21,9 +20,9 @@ public partial class InventoryManager : ContainerManager
 	}
 
 	//gets called whenever player clicks inventory slot
-	public void SlotInteraction(Slot slot, MouseButton mouse){
+	public override void SlotInteraction(Slot slot, MouseButton mouse){
 		if(mouse == MouseButton.Left){
-			slot.PlaceStack(draggedItem);
+			slot.LeftClick(draggedItem);
 		}
 	}
 

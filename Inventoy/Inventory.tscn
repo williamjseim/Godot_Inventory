@@ -1,16 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjh4rjqvry07i"]
+[gd_scene load_steps=5 format=3 uid="uid://bjh4rjqvry07i"]
 
 [ext_resource type="PackedScene" uid="uid://dn3pwjqlcxh3f" path="res://Inventoy/Scenes/InventorySlot.tscn" id="1_geyir"]
 [ext_resource type="Script" path="res://Inventoy/InventoryManager.cs" id="1_tdj1w"]
+[ext_resource type="Resource" uid="uid://d2b2vd7s5vxt3" path="res://Inventoy/TestItem.tres" id="2_rrvgg"]
 [ext_resource type="PackedScene" uid="uid://cjgig0tjws7le" path="res://Inventoy/Scenes/DraggedItem.tscn" id="3_4lnyh"]
 
 [node name="Inventory" type="Control" node_paths=PackedStringArray("draggedItem", "grid", "slots")]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 848.0
-offset_bottom = 480.0
+anchor_right = 0.736
+anchor_bottom = 0.741
+offset_right = 0.12793
+offset_bottom = -0.16803
 script = ExtResource("1_tdj1w")
 draggedItem = NodePath("DraggedItem")
+item = ExtResource("2_rrvgg")
 grid = NodePath("GridContainer")
 slots = []
 AutoGenerateSlots = true
@@ -22,8 +25,9 @@ visible = false
 layout_mode = 0
 
 [node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 324.0
-offset_right = 848.0
-offset_bottom = 480.0
 columns = 12

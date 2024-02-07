@@ -44,18 +44,33 @@ public partial class Slot : Panel
 		this.itemSprite.Texture = sprite;
 	}
 
+	public virtual void Empty(){
+		this.itemHolder = ItemHolder.Empty;
+	}
+
 	public virtual void PlaceStack(DraggedItem DraggedItem){
-		if(this.IsEmpty){
-			this.itemHolder = DraggedItem.itemHolder;
-			DraggedItem.Destroy();
+		if(DraggedItem.IsEmpty){
+			DraggedItem.ItemHolder = this.itemHolder;
+			this.Empty();
+		}
+		if(this.IsEmpty){//places items in empty slot
+			this.itemHolder = DraggedItem.ItemHolder;
+			DraggedItem.Empty();
+			return;
+		}
+		else{//swaps items between draggeditem and selected inventoryslot
+			var tempItemHolder = this.itemHolder;
+			this.itemHolder = DraggedItem.ItemHolder;
+			DraggedItem.ItemHolder = this.itemHolder;
+			return;
 		}
 	}
 
 	public virtual void PlaceHalfStack(DraggedItem draggedItem){
 		int stackSpace = Math.Abs(this.StackSize - this.Amount);
-		int transferAmount = draggedItem.itemHolder.Amount == 1 ? 1 : draggedItem.itemHolder.Amount / 2;
+		int transferAmount = draggedItem.ItemHolder.Amount == 1 ? 1 : draggedItem.ItemHolder.Amount / 2;
 		if(stackSpace > transferAmount){
-			draggedItem.itemHolder.Amount -= transferAmount;
+			draggedItem.ItemHolder.Amount -= transferAmount;
 			
 		}
 	}

@@ -1,26 +1,30 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
-public partial class InventoryManager : Node
+public partial class InventoryManager : ContainerManager
 {
-#nullable enable
-	DraggedItem? draggedItem;
-
-#nullable disable
+	[Export] protected DraggedItem draggedItem;
 	
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		base._Ready();
+		if(draggedItem == null)
+			GD.PrintErr($"{nameof(draggedItem)} is null");
+		SetupInventoryGrid();
 		Slot.Interact += this.SlotInteraction;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+
 	}
 
+	//gets called whenever player clicks inventory slot
 	public void SlotInteraction(Slot slot, MouseButton mouse){
-		
+		if(mouse == MouseButton.Left){
+			slot.PlaceStack(draggedItem);
+		}
 	}
 
 	//should be called then opening inventory

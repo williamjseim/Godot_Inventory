@@ -5,14 +5,17 @@ using System.Collections.Generic;
 public partial class InventoryManager : ContainerManager
 {
 	[Export] protected DraggedItem draggedItem;
+	[Export] protected Item testItem;
 	
 	public override void _Ready()
 	{
 		base._Ready();
 		if(draggedItem == null)
 			GD.PrintErr($"{nameof(draggedItem)} is null");
+
 		SetupInventoryGrid();
 		Slot.Interact += this.SlotInteraction;
+		InsertItem(this.testItem, 100);
 	}
 
 	public override void _Process(double delta)
@@ -23,17 +26,17 @@ public partial class InventoryManager : ContainerManager
 	//gets called whenever player clicks inventory slot
 	public void SlotInteraction(Slot slot, MouseButton mouse){
 		if(mouse == MouseButton.Left){
-			slot.PlaceStack(draggedItem);
+			slot.LeftClick(draggedItem);
 		}
 	}
 
-	//should be called then opening inventory
-	public void Open(){
-
-	}
-
-	//should be called then closing the inventory
-	public void Close(){
-
+	public void InsertItem(Item item, int amount){
+		foreach (Slot slot in slots)
+		{
+			if(slot.IsEmpty || slot.Itemholder.Equals(item)){
+				slot.InsertItem(new ItemHolder(item, amount));
+				break;
+			}
+		}
 	}
 }

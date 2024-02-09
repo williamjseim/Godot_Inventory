@@ -6,7 +6,7 @@ public partial class InventorySlot : Slot
     public override void _Ready()
     {
         base._Ready();
-		this.AddThemeStyleboxOverride("Panel", itemSprite);
+		this.AddThemeStyleboxOverride("panel", itemSprite);
     }
     
 }

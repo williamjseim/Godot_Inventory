@@ -1,5 +1,5 @@
 ![banner](./Docs/MarkdownBanner.png)
-![banner](/williamjseim/williamjseim/raw/main/Documentation/MarkdownBanner.png)
+![banner](../williamjseim/williamjseim/raw/main/Documentation/MarkdownBanner.png)
 # Introduction
 ## Inventory System V0.1
 

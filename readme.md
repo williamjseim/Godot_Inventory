@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 ![banner](https://github.com/williamjseim/williamjseim/blob/main/Documentation/MarkdownBanner.png)
+=======
+![banner](./williamjseim/williamjseim/Documentation/MarkdownBanner.png)
+>>>>>>> Stashed changes
 # Introduction
 ## Inventory System V0.1
 
@@ -12,3 +16,8 @@
 * [ ] Hotbar swapping
 * [x] Slots should validate if items fits
 * [ ] if item is being dragged and inventory closes it should place item in first available slot
+<<<<<<< Updated upstream
+=======
+
+![Watermark](https://github.com/williamjseim/williamjseim/blob/main/Documentation/MarkdownBanner.png)
+>>>>>>> Stashed changes

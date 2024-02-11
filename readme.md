@@ -2,7 +2,6 @@
 # Introduction
 ## Inventory System V0.1
 
-<span style="color:red;">test</span>
 
 ### Project Requirements
 * [ ] Adhere to solid

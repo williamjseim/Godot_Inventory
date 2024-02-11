@@ -1,19 +1,19 @@
 using Godot;
 using System;
 
-public partial class DraggedItem : Panel
+public partial class DraggedItem : Panel, IInsertItem
 {
-	public bool IsEmpty { get { return (ItemHolder.Equals(ItemHolder.Empty) || ItemHolder.Amount == 0 || ItemHolder.Id == -1) ? true : false; } }
+	public bool IsEmpty { get { return (holder.Equals(ItemHolder.Empty) || holder.Amount == 0 || holder.Id == -1) ? true : false; } }
 	private ItemHolder holder = ItemHolder.Empty;
 	public ItemHolder ItemHolder { get { return holder; } 
 	set {
-			this.Visible = (value == null || value.Equals(ItemHolder.Empty)) ? false : true;
 			this.holder = value;
+			this.Visible = (value.Equals(ItemHolder.Empty) || value.Equals(ItemHolder.Empty)) ? false : true;
 			UpdateSprite(value.Equals(ItemHolder.Empty) ? null : this.holder.Texture);
 		}
 	}
 
-	public int Amount { get { return this.ItemHolder.Amount; } set { ItemHolder.Amount -= value; if(this.ItemHolder.Amount <= 0){
+	public int Amount { get { return this.ItemHolder.Amount; } set { holder.Amount = value; if(holder.Amount <= 0){
 		this.Empty();
 	}}}
 
@@ -24,14 +24,9 @@ public partial class DraggedItem : Panel
 		this.AddThemeStyleboxOverride("panel", stylebox);
 	}
 
-	public void InsertItem(ItemHolder itemHolder){
-		this.ItemHolder = itemHolder;
-	}
-
     public override void _Process(double delta)
     {
 		if(!IsEmpty){
-			GD.Print("asdwa1536636");
         	this.SetPosition(this.GetGlobalMousePosition() - (this.Size / 2));
 		}
     }
@@ -41,9 +36,13 @@ public partial class DraggedItem : Panel
 	}
 
 	public void Empty(){
-		this.ItemHolder = ItemHolder.Empty;
+		this.holder = new ItemHolder();
+		UpdateSprite(null);
 	}
 
-
+    public void InsertItem(ItemHolder itemHolder)
+    {
+		this.ItemHolder = itemHolder.Clone();
+    }
 
 }

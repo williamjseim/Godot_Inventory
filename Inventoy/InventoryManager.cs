@@ -1,4 +1,5 @@
 using Godot;
+using Godot_Inventory.Inventoy.Scripts;
 using System;
 using System.Collections.Generic;
 
@@ -6,6 +7,7 @@ public partial class InventoryManager : ContainerManager
 {
 	[Export] protected DraggedItem draggedItem;
 	[Export] protected Item testItem;
+	ItemFactory factory = new();
 	
 	public override void _Ready()
 	{
@@ -20,11 +22,11 @@ public partial class InventoryManager : ContainerManager
 
 	public override void _Process(double delta)
 	{
-
+		
 	}
 
 	//gets called whenever player clicks inventory slot
-	public void SlotInteraction(Slot slot, MouseButton mouse){
+	public virtual void SlotInteraction(Slot slot, MouseButton mouse){
 		if(mouse == MouseButton.Left){
 			slot.LeftClick(draggedItem);
 		}
@@ -34,7 +36,7 @@ public partial class InventoryManager : ContainerManager
 		foreach (Slot slot in slots)
 		{
 			if(slot.IsEmpty || slot.Itemholder.Equals(item)){
-				slot.InsertItem(new ItemHolder(item, amount));
+				slot.InsertItem(factory.ProduceItemHolder(item, amount));
 				break;
 			}
 		}

@@ -1,8 +1,14 @@
-Project Requirements
+![banner](./Docs/MarkdownBanner.png)
+# Introduction
+## Inventory System V0.1
+
+<span style="color:red;">test</span>
+
+### Project Requirements
 * [ ] Adhere to solid
-* [ ] Grid of slots
-* [ ] Drag and drop like minecraft
+* [x] Grid of slots
+* [x] Drag and drop like minecraft
 * [ ] Inventory Sorting
 * [ ] Hotbar swapping
-* [ ] Slots should validate if items fits
+* [x] Slots should validate if items fits
 * [ ] if item is being dragged and inventory closes it should place item in first available slot

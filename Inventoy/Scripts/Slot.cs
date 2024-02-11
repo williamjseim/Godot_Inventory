@@ -1,26 +1,30 @@
 using Godot;
 using System;
 
-public partial class Slot : Panel
+public partial class Slot : Panel, IInsertItem
 {
+	[Export] private Label amountLabel;
 	protected ItemHolder holder = ItemHolder.Empty;
 	public ItemHolder Itemholder { get { return this.holder; } protected set{
 		this.holder = value;
 		UpdateSprite(value.Equals(ItemHolder.Empty) ? null : value.Item.ItemSprite);
+		UpdateAmount(this.Amount);
 	}}
-	protected StyleBoxTexture itemSprite = new();
+	
+	protected StyleBoxTexture stylebox = new();
 	public bool IsEmpty {
 		get{
 			return Itemholder.Equals(ItemHolder.Empty) || Itemholder.Id == -1;
 		}
 	}
 
-	public virtual int Amount {get { return (this.Itemholder.Equals(ItemHolder.Empty) || this.Itemholder.Id == -1) ? 0 : this.Itemholder.Amount; } protected set
+	public virtual int Amount {get { return (this.Itemholder.Equals(ItemHolder.Empty) || this.Itemholder.Id == -1) ? 0 : this.holder.Amount; } protected set
 		{ 
-			this.Itemholder.Amount = value;
+			this.holder.Amount = value;
 			if(this.Amount <= 0){
-				Itemholder = ItemHolder.Empty;
+				this.Itemholder = ItemHolder.Empty;
 			}
+			UpdateAmount(this.Amount);
 		}
 	}
 	protected virtual int StackSize {get { return (this.Itemholder.Equals(ItemHolder.Empty) || this.Itemholder.Id == -1) ? 0 : this.Itemholder.Item.StackSize; }}
@@ -44,36 +48,46 @@ public partial class Slot : Panel
 	}
 
 	public virtual void UpdateSprite(Texture2D sprite){
-		this.itemSprite.Texture = sprite;
+		this.stylebox.Texture = sprite;
+	}
+
+	public virtual void UpdateAmount(int amount){
+		if(amount <= 0){
+			this.amountLabel.Visible = false;
+			return;
+		}
+		this.amountLabel.Visible = true;
+		this.amountLabel.Text = amount.ToString();
 	}
 
 	public virtual void Empty(){
-		this.Itemholder = ItemHolder.Empty;
+		this.holder = ItemHolder.Empty;
+		UpdateSprite(null);
+		UpdateAmount(this.Amount);
 	}
 
 	public virtual void InsertItem(ItemHolder item){
-		this.Itemholder = item;
+		this.Itemholder = item.Clone();
 	}
 
 	public virtual void LeftClick(DraggedItem DraggedItem){
-		GD.Print("left click");
 		if(this.IsEmpty && DraggedItem.IsEmpty){
 			return;
 		}
 		if(DraggedItem.IsEmpty){
-			GD.Print("pickup");
 			DraggedItem.InsertItem(this.Itemholder);
 			this.Empty();
+			return;
 		}
 		if(this.IsEmpty){//places items in empty slot
-			this.Itemholder = DraggedItem.ItemHolder;
+			this.InsertItem(DraggedItem.ItemHolder);
 			DraggedItem.Empty();
 			return;
 		}
 		else{//swaps items between draggeditem and selected inventoryslot
 			var tempItemHolder = this.Itemholder;
-			this.Itemholder = DraggedItem.ItemHolder;
-			DraggedItem.ItemHolder = this.Itemholder;
+			this.InsertItem(DraggedItem.ItemHolder);
+			DraggedItem.InsertItem(tempItemHolder);
 			return;
 		}
 	}
@@ -82,8 +96,7 @@ public partial class Slot : Panel
 		int stackSpace = Math.Abs(this.StackSize - this.Amount);
 		int transferAmount = draggedItem.ItemHolder.Amount == 1 ? 1 : draggedItem.ItemHolder.Amount / 2;
 		if(stackSpace > transferAmount){
-			draggedItem.ItemHolder.Amount -= transferAmount;
-			
-		}
+			draggedItem.Amount -= transferAmount;
+		}//*/
 	}
 }

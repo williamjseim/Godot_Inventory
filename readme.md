@@ -1,4 +1,3 @@
-![banner](./Docs/MarkdownBanner.png)
 ![banner](https://github.com/williamjseim/williamjseim/blob/main/Documentation/MarkdownBanner.png)
 # Introduction
 ## Inventory System V0.1

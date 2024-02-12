@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class ContainerManager : Control
 {
-	[Export] protected GridContainer grid;
+	[Export] protected Control slotContainer;
 	[Export] protected Slot[] slots;
 	[ExportCategory("Generate slots")]
 	[Export] protected bool AutoGenerateSlots;//this will create array of slot everytime game starts
@@ -12,7 +12,7 @@ public partial class ContainerManager : Control
 	[Export] protected PackedScene slotScene;
 	public override void _Ready()
 	{
-		if(grid == null)
+		if(slotContainer == null)
 			GD.PrintErr("Grid is null");
 	}
 
@@ -28,19 +28,19 @@ public partial class ContainerManager : Control
 			{
 				var slot = this.slotScene.Instantiate<Slot>();
 				slots.Add(slot);
-				this.grid.AddChild(slot);
+				this.slotContainer.AddChild(slot);
 			}
 			this.slots = slots.ToArray();
 			return;
 		}
 
-		var children = grid.GetChildren();
+		var children = slotContainer.GetChildren();
 
 		if(children.Count == 0){
 			GD.PrintErr("no children in inventoryGrid if you dont want to manually assign slots then enable AutoGenerateSlots");
 			return;
 		}
-		foreach (var item in grid.GetChildren())
+		foreach (var item in slotContainer.GetChildren())
 		{
 			if(item is Slot slot){
 				slots.Add(slot);

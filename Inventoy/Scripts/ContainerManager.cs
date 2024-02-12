@@ -21,7 +21,7 @@ public partial class ContainerManager : Control
 
 	}
 
-	public virtual void SetupInventoryGrid(){
+	protected virtual void SetupInventoryGrid(){
 		List<Slot> slots = new();
 		if(AutoGenerateSlots){
 			for (int i = 0; i < SlotAmount; i++)

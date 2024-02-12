@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+//this object could be freed and reinstantiated everytime you need instead of just making it invisible and not move
 public partial class DraggedItem : Panel, IInsertItem
 {
 	public bool IsEmpty { get { return (holder.Equals(ItemHolder.Empty) || holder.Amount == 0 || holder.Id == -1) ? true : false; } }

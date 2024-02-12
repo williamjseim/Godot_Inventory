@@ -70,6 +70,10 @@ public partial class Slot : Panel, IInsertItem
 		this.Itemholder = item.Clone();
 	}
 
+	public virtual void InsertItem(Item item, int amount){
+		this.Itemholder = new(item, amount);
+	}
+
 	public virtual void LeftClick(DraggedItem DraggedItem){
 		if(this.IsEmpty && DraggedItem.IsEmpty){
 			return;

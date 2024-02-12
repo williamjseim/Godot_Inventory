@@ -26,6 +26,17 @@ public class ItemHolder
   public Texture2D Texture { get{ return this.Item == null ? null : this.Item.ItemSprite; } }
 
   /// <summary>
+  /// Usefull if you want a item to have a custom name
+  /// </summary>
+  private string name = string.Empty;
+  public string Name
+  {
+    get { return this.name == string.Empty ? this.Item.Name : this.name; }
+    protected set { name = value; }
+  }
+  
+
+  /// <summary>
   /// Use this to check if itemholders are equal
   /// </summary>
   /// <param name="obj"></param>

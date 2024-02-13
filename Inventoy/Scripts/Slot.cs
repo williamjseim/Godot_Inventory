@@ -14,11 +14,11 @@ public partial class Slot : Panel, IInsertItem
 	protected StyleBoxTexture stylebox = new();
 	public bool IsEmpty {
 		get{
-			return Itemholder.Equals(ItemHolder.Empty) || Itemholder.Id == -1;
+			return Itemholder.Equals(ItemHolder.Empty) || Itemholder.Id == Item.Empty;
 		}
 	}
 
-	public virtual int Amount {get { return (this.Itemholder.Equals(ItemHolder.Empty) || this.Itemholder.Id == -1) ? 0 : this.holder.Amount; } protected set
+	public virtual int Amount {get { return (this.Itemholder.Equals(ItemHolder.Empty) || this.Itemholder.Id == Item.Empty) ? 0 : this.holder.Amount; } protected set
 		{ 
 			this.holder.Amount = value;
 			if(this.Amount <= 0){
@@ -27,7 +27,7 @@ public partial class Slot : Panel, IInsertItem
 			UpdateAmount(this.Amount);
 		}
 	}
-	protected virtual int StackSize {get { return (this.Itemholder.Equals(ItemHolder.Empty) || this.Itemholder.Id == -1) ? 0 : this.Itemholder.Item.StackSize; }}
+	protected virtual int StackSize {get { return (this.Itemholder.Equals(ItemHolder.Empty) || this.Itemholder.Id == Item.Empty) ? 0 : this.Itemholder.Item.StackSize; }}
 	
 	//used for communicating with the inventory without a reference
 	public static event Action<Slot, MouseButton> Interact;
@@ -88,12 +88,14 @@ public partial class Slot : Panel, IInsertItem
 			DraggedItem.Empty();
 			return;
 		}
-		else{//swaps items between draggeditem and selected inventoryslot
-			var tempItemHolder = this.Itemholder;
-			this.InsertItem(DraggedItem.ItemHolder);
-			DraggedItem.InsertItem(tempItemHolder);
-			return;
+		if(this.Itemholder.Equals(DraggedItem.ItemHolder)){
+			
 		}
+		//swaps items between draggeditem and selected inventoryslot
+		var tempItemHolder = this.Itemholder;
+		this.InsertItem(DraggedItem.ItemHolder);
+		DraggedItem.InsertItem(tempItemHolder);
+		return;
 	}
 
 	public virtual void RightClick(DraggedItem draggedItem){

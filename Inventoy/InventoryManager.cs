@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class InventoryManager : ContainerManager
 {
@@ -15,7 +16,7 @@ public partial class InventoryManager : ContainerManager
 
 		SetupInventoryGrid();
 		Slot.Interact += this.SlotInteraction;
-		InsertItem(this.testItem, 100);
+		InsertItem(ItemDatabase.Instance.Items.Last().Value, 100);
 	}
 
 	public override void _Process(double delta)
@@ -35,7 +36,7 @@ public partial class InventoryManager : ContainerManager
 	}
 
 	/// <summary>
-	/// Inserts 
+	/// Use to add item 
 	/// </summary>
 	/// <param name="item"></param>
 	/// <param name="amount"></param>

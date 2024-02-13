@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://dn3pwjqlcxh3f" path="res://Inventoy/Scenes/InventorySlot.tscn" id="1_geyir"]
 [ext_resource type="Script" path="res://Inventoy/InventoryManager.cs" id="1_tdj1w"]
-[ext_resource type="Resource" uid="uid://d2b2vd7s5vxt3" path="res://Inventoy/TestItem.tres" id="2_cf3mh"]
+[ext_resource type="Resource" uid="uid://d2b2vd7s5vxt3" path="res://Inventoy/Items/TestItem.tres" id="2_cf3mh"]
 [ext_resource type="PackedScene" uid="uid://cjgig0tjws7le" path="res://Inventoy/Scenes/DraggedItem.tscn" id="3_4lnyh"]
 
-[node name="Inventory" type="Control" node_paths=PackedStringArray("draggedItem", "grid", "slots")]
+[node name="Inventory" type="Control" node_paths=PackedStringArray("draggedItem", "slotContainer", "slots")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 848.0
@@ -13,7 +13,7 @@ offset_bottom = 480.0
 script = ExtResource("1_tdj1w")
 draggedItem = NodePath("DraggedItem")
 testItem = ExtResource("2_cf3mh")
-grid = NodePath("GridContainer")
+slotContainer = NodePath("GridContainer")
 slots = []
 AutoGenerateSlots = true
 SlotAmount = 48

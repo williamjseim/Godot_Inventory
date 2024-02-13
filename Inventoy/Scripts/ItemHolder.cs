@@ -21,7 +21,7 @@ public class ItemHolder
 
 	[JsonIgnore]
 	public Item Item { get; set; } // resources cant be serialized and therefore not saved to a json file
-	public int Id { get { return this.Item == null ? -1 : Item.id; }} // -1 means the slot is empty
+	public string Id { get { return this.Item == null ? Item.Empty : Item.id; }} // -1 means the slot is empty
 	public int Amount { get; set; } //amount of items in slot
   public Texture2D Texture { get{ return this.Item == null ? null : this.Item.ItemSprite; } }
 
@@ -43,13 +43,22 @@ public class ItemHolder
   /// <returns>True if itemholders are equal</returns>
   public override bool Equals(object obj)
   {
-    if(obj is ItemHolder itemHolder && itemHolder.Id == this.Id)
+    if(obj is ItemHolder itemHolder && itemHolder.Id == this.Id && this.name == itemHolder.name)
       return true;
 
     return false;
   }
 
+  public static bool operator == (ItemHolder a, ItemHolder b){
+    return a.Equals(b);
+  }
+
+  public static bool operator != ( ItemHolder a, ItemHolder b){
+    return !a.Equals(b);
+  }
+
   /// <summary>
+  /// Itemholder cant be transfered between slots without cloning them if they dont get cloned they will get overriden no matter what slot the itemholder was transfered to
   /// Should be called In the class that gonna use it
   /// </summary>
   /// <returns></returns>
@@ -59,7 +68,7 @@ public class ItemHolder
       Amount = this.Amount,
     };
   }
-  //ignore
+
   public override int GetHashCode()
   {
       return base.GetHashCode();

@@ -1,7 +1,7 @@
 using Godot;
 using System.Linq;
 
-public partial class InventoryManager : ContainerManager
+public partial class InventoryManager : ContainerManager, IInsertItem
 {
 	[Export] protected DraggedItem draggedItem;
 	[Export] protected Item testItem;
@@ -50,4 +50,26 @@ public partial class InventoryManager : ContainerManager
 			}
 		}
 	}
+
+    public void InsertItem(ItemHolder item)
+    {
+        foreach (Slot slot in slots)
+		{
+			if(slot.IsEmpty || slot.Itemholder.Equals(item)){
+				slot.InsertItem(item);
+				break;
+			}
+		}
+    }
+
+    public override void Close()
+    {
+		//quickly throw the item in an empty slot then inventory closes
+		if(!this.draggedItem.IsEmpty){
+			this.InsertItem(this.draggedItem.ItemHolder);
+			this.draggedItem.Empty();
+		}
+    }
+
+
 }

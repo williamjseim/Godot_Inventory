@@ -9,7 +9,7 @@
   <br>
   ##### Virtual Methods
 * [SetupInventoryGrid()]()
-If you want different behavior make a class that inherits this one and override this method
+If you want to change how the inventory is setup do not change the code in this. instead method make a new class and override it
 
 #### SlotContainer
 slotContainer is the [Container](https://docs.godotengine.org/en/stable/classes/class_container.html) that all the inventory slots are contained in you could change this to anything that inherits control but it should properly be a grid unless you want to place alle the slots manually which could be done but then you should turn off [AutoGenerateSlots](#autogenerateslots) which you can do from the editor just remember to populate the [slot array](#slot-array-1) or you'll get an <span style="color:red;">error<span>.

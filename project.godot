@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GodotInventory"
-run/main_scene="res://Inventoy/Inventory.tscn"
+run/main_scene="res://Inventory/Inventory.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

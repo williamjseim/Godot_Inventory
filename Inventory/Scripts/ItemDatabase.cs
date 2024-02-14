@@ -1,20 +1,18 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 public class ItemDatabase
 {
     private static ItemDatabase _instance;
     public static ItemDatabase Instance { get { if(_instance == null){ _instance = new(); } return _instance; } }
 
-    string baseItemFolder = "res://Inventoy/Items";//change this to what ever path matches your project
+    string baseItemFolder = "res://Inventory/ItemParent";//change this to what ever path matches your project
 
     public ItemDatabase()
     {
         LoadItems();
     }
+    
     public Dictionary<string, Item> Items = new();
 
     public Item this[string key]{
@@ -35,8 +33,6 @@ public class ItemDatabase
     }
 
     private void LoadItems(){
-        var itemFolders = DirAccess.GetDirectoriesAt(baseItemFolder);//get actual path to item folder
-        
         List<Item> foundItems = new();
         foreach (var file in DirAccess.GetFilesAt(baseItemFolder))
         {
@@ -45,15 +41,21 @@ public class ItemDatabase
             }
         }
 
+        string[] foldersplit = baseItemFolder.Split("/");
+        string itemParent = foldersplit[foldersplit.Length-2];
+        
         foreach (var item in foundItems)
         {
-            string itemParent = this.baseItemFolder.Split("/").Last();
+            if(item.id != string.Empty){
+                this.Items.Add(item.id, item);
+                continue;
+            }
             string itemId = $"{itemParent}:{item.Name}";
             this.Items.Add(itemId, item);
             if(item.id == Item.Empty){
+                //item id gets save to the resource so it doesnt need to be set again
                 OverrideItemId(item, itemId);
             }
-            GD.Print(itemParent, item.Name);
         }
     }
 }

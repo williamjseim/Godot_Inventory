@@ -6,7 +6,7 @@ public partial class DraggedItem : Panel, IInsertItem
 	public bool IsEmpty { get { return (holder.Equals(ItemHolder.Empty) || holder.Amount == 0 || holder.Id == Item.Empty) ? true : false; } }
 	private ItemHolder holder = ItemHolder.Empty;
 	public ItemHolder ItemHolder { get { return holder; } 
-	set {
+		protected set {
 			this.holder = value;
 			this.Visible = (value.Equals(ItemHolder.Empty) || value.Equals(ItemHolder.Empty)) ? false : true;
 			UpdateSprite(value.Equals(ItemHolder.Empty) ? null : this.holder.Texture);
@@ -35,9 +35,13 @@ public partial class DraggedItem : Panel, IInsertItem
 		this.stylebox.Texture = texture;
 	}
 
+	/// <summary>
+	/// this empties the dragged item
+	/// </summary>
 	public void Empty(){
 		this.holder = new ItemHolder();
 		UpdateSprite(null);
+		this.Visible = false;
 	}
 
     public void InsertItem(ItemHolder itemHolder)

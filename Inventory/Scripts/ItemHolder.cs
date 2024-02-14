@@ -35,7 +35,6 @@ public class ItemHolder
     protected set { name = value; }
   }
   
-
   /// <summary>
   /// Use this to check if itemholders are equal
   /// </summary>

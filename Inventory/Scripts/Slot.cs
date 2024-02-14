@@ -1,10 +1,15 @@
 using Godot;
 using System;
+using System.Threading;
 
 public partial class Slot : Panel, IInsertItem
 {
 	[Export] private Label amountLabel;
 	protected ItemHolder holder = ItemHolder.Empty;
+
+	/// <summary>
+	/// use InsertItem to replace the itemholder
+	/// </summary>
 	public ItemHolder Itemholder { get { return this.holder; } protected set{
 		this.holder = value;
 		UpdateSprite(value.Equals(ItemHolder.Empty) ? null : value.Item.ItemSprite);
@@ -88,8 +93,9 @@ public partial class Slot : Panel, IInsertItem
 			DraggedItem.Empty();
 			return;
 		}
-		if(this.Itemholder.Equals(DraggedItem.ItemHolder)){
-			
+		if(this.Itemholder == DraggedItem.ItemHolder){
+			CombineStacks(DraggedItem);
+			return;
 		}
 		//swaps items between draggeditem and selected inventoryslot
 		var tempItemHolder = this.Itemholder;
@@ -98,11 +104,20 @@ public partial class Slot : Panel, IInsertItem
 		return;
 	}
 
+	public virtual void CombineStacks(DraggedItem draggedItem){
+		int stackSpace = Math.Abs(this.Amount - this.StackSize);
+		if(draggedItem.Amount > stackSpace){
+			draggedItem.Amount -= stackSpace;
+			this.Amount += stackSpace;
+			return;
+		}
+		this.Amount += draggedItem.Amount;
+		draggedItem.Empty();
+	}
+
 	public virtual void RightClick(DraggedItem draggedItem){
-		int stackSpace = Math.Abs(this.StackSize - this.Amount);
-		int transferAmount = draggedItem.ItemHolder.Amount == 1 ? 1 : draggedItem.ItemHolder.Amount / 2;
-		if(stackSpace > transferAmount){
-			draggedItem.Amount -= transferAmount;
-		}//*/
+		int transferAmount = this.Amount == 1 ? 1 : this.Amount / 2;
+		draggedItem.InsertItem(new ItemHolder(this.Itemholder.Item, transferAmount));
+		this.Amount -= transferAmount;
 	}
 }

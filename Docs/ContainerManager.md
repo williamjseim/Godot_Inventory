@@ -1,5 +1,6 @@
 ![banner](https://github.com/williamjseim/williamjseim/blob/main/Documentation/MarkdownBanner.png)
-# [ContainerManager](../Inventoy/Scripts/ContainerManager.cs)
+# [ContainerManager](../Inventory/Scripts/ContainerManager.cs)
+### Inherits [Control](https://docs.godotengine.org/en/stable/classes/class_control.html)
 
 * [SlotContainer](#slotcontainer-1)
 * [Slot array](#slot-array-1)

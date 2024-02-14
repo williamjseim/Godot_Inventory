@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 public partial class InventoryManager : ContainerManager
@@ -32,6 +30,9 @@ public partial class InventoryManager : ContainerManager
 	public virtual void SlotInteraction(Slot slot, MouseButton mouse){
 		if(mouse == MouseButton.Left){
 			slot.LeftClick(draggedItem);
+		}
+		else if(mouse == MouseButton.Right){
+			slot.RightClick(draggedItem);
 		}
 	}
 

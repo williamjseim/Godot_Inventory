@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dn3pwjqlcxh3f"]
 
-[ext_resource type="Script" path="res://Inventoy/Scripts/InventorySlot.cs" id="1_lbek0"]
+[ext_resource type="Script" path="res://Inventory/Scripts/InventorySlot.cs" id="1_lbek0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p0lpd"]
 bg_color = Color(0, 0, 0, 1)
@@ -13,16 +13,6 @@ offset_bottom = 40.0
 script = ExtResource("1_lbek0")
 amountLabel = NodePath("Label")
 
-[node name="Label" type="Label" parent="."]
-show_behind_parent = true
-z_as_relative = false
-layout_mode = 0
-offset_top = 17.0
-offset_right = 40.0
-offset_bottom = 40.0
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Panel" type="Panel" parent="."]
 show_behind_parent = true
 texture_filter = 1
@@ -32,3 +22,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_p0lpd")
+
+[node name="Label" type="Label" parent="."]
+z_as_relative = false
+layout_mode = 0
+offset_top = 17.0
+offset_right = 40.0
+offset_bottom = 40.0
+horizontal_alignment = 1
+vertical_alignment = 1

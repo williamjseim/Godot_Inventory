@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bjh4rjqvry07i"]
 
-[ext_resource type="PackedScene" uid="uid://dn3pwjqlcxh3f" path="res://Inventoy/Scenes/InventorySlot.tscn" id="1_geyir"]
-[ext_resource type="Script" path="res://Inventoy/InventoryManager.cs" id="1_tdj1w"]
-[ext_resource type="Resource" uid="uid://d2b2vd7s5vxt3" path="res://Inventoy/Items/TestItem.tres" id="2_cf3mh"]
-[ext_resource type="PackedScene" uid="uid://cjgig0tjws7le" path="res://Inventoy/Scenes/DraggedItem.tscn" id="3_4lnyh"]
+[ext_resource type="PackedScene" uid="uid://dn3pwjqlcxh3f" path="res://Inventory/Scenes/InventorySlot.tscn" id="1_geyir"]
+[ext_resource type="Script" path="res://Inventory/InventoryManager.cs" id="1_tdj1w"]
+[ext_resource type="Resource" uid="uid://d2b2vd7s5vxt3" path="res://Inventory/ItemParent/TestItem.tres" id="2_cf3mh"]
+[ext_resource type="PackedScene" uid="uid://cjgig0tjws7le" path="res://Inventory/Scenes/DraggedItem.tscn" id="3_4lnyh"]
 
 [node name="Inventory" type="Control" node_paths=PackedStringArray("draggedItem", "slotContainer", "slots")]
 layout_mode = 3

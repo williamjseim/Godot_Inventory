@@ -1,10 +1,9 @@
 using Godot;
 using System;
-using System.Threading;
 
 public partial class Slot : Panel, IInsertItem
 {
-	[Export] private Label amountLabel;
+	[Export] protected Label amountLabel;
 	protected ItemHolder holder = ItemHolder.Empty;
 
 	/// <summary>
@@ -17,7 +16,7 @@ public partial class Slot : Panel, IInsertItem
 	}}
 	
 	protected StyleBoxTexture stylebox = new();
-	public bool IsEmpty {
+	public virtual bool IsEmpty {
 		get{
 			return Itemholder.Equals(ItemHolder.Empty);
 		}
@@ -47,7 +46,7 @@ public partial class Slot : Panel, IInsertItem
 	}
 
 	//communicates to the InventoryManager that a slot was clicked
-	public void Input(InputEvent input){
+	public virtual void Input(InputEvent input){
 		if(input is InputEventMouseButton mouse && mouse.IsPressed())
 			Interact?.Invoke(this, mouse.ButtonIndex);
 	}
@@ -56,8 +55,8 @@ public partial class Slot : Panel, IInsertItem
 		this.stylebox.Texture = sprite;
 	}
 
-	public virtual void UpdateAmount(int amount){
-		if(amount <= 0){
+	protected virtual void UpdateAmount(int amount){
+		if(amount <= 1){
 			this.amountLabel.Visible = false;
 			return;
 		}

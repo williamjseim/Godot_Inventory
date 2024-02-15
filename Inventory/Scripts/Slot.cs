@@ -19,7 +19,7 @@ public partial class Slot : Panel, IInsertItem
 	protected StyleBoxTexture stylebox = new();
 	public bool IsEmpty {
 		get{
-			return Itemholder.Equals(ItemHolder.Empty) || Itemholder.Id == Item.Empty;
+			return Itemholder.Equals(ItemHolder.Empty);
 		}
 	}
 
@@ -83,7 +83,7 @@ public partial class Slot : Panel, IInsertItem
 		if(this.IsEmpty && DraggedItem.IsEmpty){
 			return;
 		}
-		if(DraggedItem.IsEmpty){
+		if(DraggedItem.IsEmpty){//picks up stack
 			DraggedItem.InsertItem(this.Itemholder);
 			this.Empty();
 			return;
@@ -93,15 +93,12 @@ public partial class Slot : Panel, IInsertItem
 			DraggedItem.Empty();
 			return;
 		}
-		if(this.Itemholder == DraggedItem.ItemHolder){
+		if(this.Itemholder == DraggedItem.ItemHolder){//combines stack
 			CombineStacks(DraggedItem);
 			return;
 		}
 		//swaps items between draggeditem and selected inventoryslot
-		var tempItemHolder = this.Itemholder;
-		this.InsertItem(DraggedItem.ItemHolder);
-		DraggedItem.InsertItem(tempItemHolder);
-		return;
+		SwapItems(DraggedItem);
 	}
 
 	public virtual void CombineStacks(DraggedItem draggedItem){
@@ -116,8 +113,40 @@ public partial class Slot : Panel, IInsertItem
 	}
 
 	public virtual void RightClick(DraggedItem draggedItem){
+		if(draggedItem.IsEmpty){
+			TakeHalfStack(draggedItem);
+			return;
+		}
+		if(!draggedItem.IsEmpty && (this.IsEmpty || this.Itemholder == draggedItem.ItemHolder)){
+			PlaceSingleItem(draggedItem);
+			return;
+		}
+		SwapItems(draggedItem);
+	}
+
+	public virtual void TakeHalfStack(DraggedItem draggedItem){
 		int transferAmount = this.Amount == 1 ? 1 : this.Amount / 2;
 		draggedItem.InsertItem(new ItemHolder(this.Itemholder.Item, transferAmount));
 		this.Amount -= transferAmount;
+
+	}
+
+	public virtual void PlaceSingleItem(DraggedItem draggedItem){
+		if(this.IsEmpty){
+			this.InsertItem(draggedItem.ItemHolder);
+			this.Amount = 1;
+			draggedItem.Amount--;
+			return;
+		}
+		draggedItem.Amount--;
+		this.Amount++;
+		return;
+	}
+
+	public virtual void SwapItems(DraggedItem draggedItem){
+		var tempItemHolder = this.Itemholder;
+		this.InsertItem(draggedItem.ItemHolder);
+		draggedItem.InsertItem(tempItemHolder);
+		return;
 	}
 }

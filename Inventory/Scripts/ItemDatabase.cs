@@ -20,6 +20,9 @@ public class ItemDatabase
     }
     
     public Item GetItem(string id){
+        if(id == Item.Empty){
+            return null;
+        }
         if(this.Items.TryGetValue(id, out Item item)){
             return item;
         }

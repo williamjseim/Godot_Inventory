@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class ContainerManager : Control
+public partial class ContainerManager : Control, ISaveAble
 {
 	[Export] protected Control slotContainer;
 	[Export] protected Slot[] slots;
@@ -57,5 +57,25 @@ public partial class ContainerManager : Control
 	//should be called then closing the inventory
 	public virtual void Close(){
 
+	}
+
+    public object Save()
+    {
+		List<ItemHolder> holders = new();
+        foreach (var slot in slots)
+		{
+			holders.Add(slot.Itemholder);
+		}
+		return holders;
+    }
+
+	public void Load(object obj)
+	{
+		List<ItemHolder> holders = obj as List<ItemHolder>;
+		for (int i = 0; i < holders.Count; i++)
+		{
+			holders[i].Item = ItemDatabase.Instance.GetItem(holders[i].id);
+			slots[i].InsertItem(holders[i]);
+		}
 	}
 }

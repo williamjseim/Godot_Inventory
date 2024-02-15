@@ -19,11 +19,18 @@ public class ItemHolder
     this.Amount = itemHolder.Amount;
   }
 
+  private Item item;
 	[JsonIgnore]
-	public Item Item { get; set; } // resources cant be serialized and therefore not saved to a json file
+	public Item Item { get{ return item; } set{
+    this.item = value;
+    this.id = item.id;
+  } } // resources cant be serialized and therefore not saved to a json file
+  [JsonIgnore]
+  public Texture2D Texture { get{ return this.Item == null ? null : this.Item.ItemSprite; } }
+
+  public string id;
 	public string Id { get { return this.Item == null ? Item.Empty : Item.id; }} // -1 means the slot is empty
 	public int Amount { get; set; } //amount of items in slot
-  public Texture2D Texture { get{ return this.Item == null ? null : this.Item.ItemSprite; } }
 
   /// <summary>
   /// Usefull if you want a item to have a custom name and dont wanna override the name the item resource has
@@ -73,6 +80,6 @@ public class ItemHolder
       return base.GetHashCode();
   }
 
-  public static ItemHolder Empty => new ItemHolder();
+    public static ItemHolder Empty => new ItemHolder();
 
 }

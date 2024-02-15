@@ -8,12 +8,16 @@
 * [SlotScene]()
   <br>
   ##### Virtual Methods
-* [SetupInventoryGrid()]()
+### SetupInventoryGrid
 If you want to change how the inventory is setup do not change the code in this. instead method make a new class and override it
+
+### Open Close
+Call these methods when opening or closing container gui
+and use it to do something then closing the inventory like emptying the [draggeditem](./DraggedItem.md) and inserting the [itemholder](./Item.md) into a slot 
+
 
 #### SlotContainer
 slotContainer is the [Container](https://docs.godotengine.org/en/stable/classes/class_container.html) that all the inventory slots are contained in you could change this to anything that inherits control but it should properly be a grid unless you want to place alle the slots manually which could be done but then you should turn off [AutoGenerateSlots](#autogenerateslots) which you can do from the editor just remember to populate the [slot array](#slot-array-1) or you'll get an <span style="color:red;">error<span>.
-
 
 #### Slot array
 holds a reference to all slots in the container it either has to be populated manually in the editor or you can turn on [AutoGenerateSlots](#autogenerateslots) and it will generate a certain amount of slot then ever the game starts

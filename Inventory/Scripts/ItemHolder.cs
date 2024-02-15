@@ -26,7 +26,7 @@ public class ItemHolder
   public Texture2D Texture { get{ return this.Item == null ? null : this.Item.ItemSprite; } }
 
   /// <summary>
-  /// Usefull if you want a item to have a custom name
+  /// Usefull if you want a item to have a custom name and dont wanna override the name the item resource has
   /// </summary>
   private string name = string.Empty;
   public string Name

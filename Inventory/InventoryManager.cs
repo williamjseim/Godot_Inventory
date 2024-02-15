@@ -4,8 +4,6 @@ using System.Linq;
 public partial class InventoryManager : ContainerManager, IInsertItem
 {
 	[Export] protected DraggedItem draggedItem;
-	[Export] protected Item testItem;
-	
 	public override void _Ready()
 	{
 		base._Ready();
@@ -14,12 +12,7 @@ public partial class InventoryManager : ContainerManager, IInsertItem
 
 		SetupInventoryGrid();
 		Slot.Interact += this.SlotInteraction;
-		InsertItem(ItemDatabase.Instance.Items.Last().Value, 100);
-	}
-
-	public override void _Process(double delta)
-	{
-		
+		InsertItem(ItemDatabase.Instance.GetItem("ItemParent:Test"), 100);
 	}
 
 	/// <summary>

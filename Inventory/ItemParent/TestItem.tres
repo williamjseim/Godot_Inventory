@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_6fo6k")
 Name = "Test"
-id = "Inventory:Test"
+id = "ItemParent:Test"
 ItemSprite = ExtResource("1_ksc5d")
 StackSize = 999

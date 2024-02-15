@@ -13,7 +13,7 @@ instead of remaking every item in every slot in every container and for ease of 
 #### Modifiers
 The standard ItemHolder has 2 Modifiers Amount and Name,
 
-Amount is just the number of item the itemholder,
+Amount is just the number of items in the itemholder,
 
 Name is if you want to set a custom name for a rare version of a standard sword, like Terraria where if you craft a really good Copper Sword its called Godly Copper Sword or if you craft a really bad one its called Terrible Copper Sword,
 

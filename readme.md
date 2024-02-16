@@ -5,7 +5,7 @@
 
 
 ### Project Requirements
-* [ ] Adhere to solid
+* [x] Adhere to solid
 * [x] Grid of slots
 * [x] Drag and drop like minecraft
 * [ ] Inventory Sorting

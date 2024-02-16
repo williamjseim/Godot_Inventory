@@ -49,7 +49,7 @@ public class ItemDatabase
         
         foreach (var item in foundItems)
         {
-            if(item.id != string.Empty){
+            if(item.id != string.Empty && item.id != Item.Empty){
                 this.Items.Add(item.id, item);
                 continue;
             }

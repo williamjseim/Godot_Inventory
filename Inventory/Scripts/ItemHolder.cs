@@ -23,7 +23,7 @@ public class ItemHolder
 	[JsonIgnore]
 	public Item Item { get{ return item; } set{
     this.item = value;
-    this.id = item.id;
+    this.id = item == null ?  Item.Empty : item.id;
   } } // resources cant be serialized and therefore not saved to a json file
   [JsonIgnore]
   public Texture2D Texture { get{ return this.Item == null ? null : this.Item.ItemSprite; } }

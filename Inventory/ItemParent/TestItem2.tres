@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://db7crak7gyp0m"]
+
+[ext_resource type="Script" path="res://Inventory/Scripts/Item.cs" id="1_7l61j"]
+[ext_resource type="Texture2D" uid="uid://cdrur88iblwje" path="res://icon_monochrome_light.svg" id="1_foxsk"]
+
+[resource]
+script = ExtResource("1_7l61j")
+Name = "Test2"
+id = "ItemParent:Test2"
+ItemSprite = ExtResource("1_foxsk")
+StackSize = 999

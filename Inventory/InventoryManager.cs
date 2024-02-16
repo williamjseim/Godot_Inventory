@@ -13,6 +13,7 @@ public partial class InventoryManager : ContainerManager, IInsertItem
 		SetupInventoryGrid();
 		Slot.Interact += this.SlotInteraction;
 		InsertItem(ItemDatabase.Instance.GetItem("ItemParent:Test"), 100);
+		InsertItem(ItemDatabase.Instance.GetItem("ItemParent:Test2"), 100);
 	}
 
 	/// <summary>

@@ -51,7 +51,6 @@ public partial class ContainerManager : Control, ISaveAble
 
 	//should be called then opening inventory
 	public virtual void Open(){
-
 	}
 
 	//should be called then closing the inventory

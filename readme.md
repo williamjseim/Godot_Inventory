@@ -15,6 +15,6 @@
 
 
 ### Warning
-this project does not really include any UX only a crude model of how you could setup the inventory
+this project does not really include any UI only a crude model of how you could setup the inventory
 
 ![Watermark](https://github.com/williamjseim/williamjseim/blob/main/Documentation/MarkDownWatermark.png)

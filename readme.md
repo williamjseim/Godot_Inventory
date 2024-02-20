@@ -1,6 +1,6 @@
 ![banner](https://github.com/williamjseim/williamjseim/blob/main/Documentation/MarkdownBanner.png)
 # Introduction
-## Inventory System V0.1
+## Inventory System V1.0
 ## Made for Godot 4.2-4.3
 
 

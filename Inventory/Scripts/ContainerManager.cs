@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public partial class ContainerManager : Control, ISaveAble
 {
 	[Export] protected Control slotContainer;
-	[Export] public Slot[] slots;
+	[Export] protected Slot[] slots;
+	public Slot[] Slots { get {return slots; } }
 	[ExportCategory("Generate slots")]
 	[Export] protected bool AutoGenerateSlots;//this will create array of slot everytime game starts
 	[Export] protected int SlotAmount;

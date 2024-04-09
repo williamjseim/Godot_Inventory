@@ -3,10 +3,19 @@ using System.Linq;
 
 public partial class InventoryManager : ContainerManager, IInsertItem
 {
+	private static InventoryManager _instance;
+
+	public static InventoryManager Instance
+	{
+		get { return _instance; }
+	}
+
+
 	[Export] protected DraggedItem draggedItem;
 	public override void _Ready()
 	{
 		base._Ready();
+		_instance = this;
 		if(draggedItem == null)
 			GD.PrintErr($"{nameof(draggedItem)} is null");
 
